@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable name="usersViewModel"
+                  type="com.example.mvvm.fragments.UsersListViewModel"/>
+
+        <variable name="usersListAdapter"
+                  type="com.sample.mvvmlivedataroomdattbinding.adapter.UsersListAdapter"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <!--Defined an attribute for recyclerview-->
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:adapter="@{usersListAdapter}"
+                submitList="@{usersViewModel.usersList}"/>
+
+        <!--Textview for displying message when no data-->
+        <TextView
+                android:id="@+id/tvNoData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="@dimen/textsize_xlarge"
+                android:textStyle="bold"
+                android:text="@string/no_data"
+                android:visibility="@{safeUnbox(usersViewModel.noData) ? View.VISIBLE : View.GONE}"
+                android:textColor="@color/colorHintNoData"/>
+
+        <!--Progressbar till data is loaded-->
+        <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="@{safeUnbox(usersViewModel.loading) ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
