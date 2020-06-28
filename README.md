@@ -21,3 +21,7 @@ Implementation Steps:
 
 Libraries Used:
 Retrofit, Lifecycle, Room, Coroutine, Navigation, Recycler View
+
+Class Diagram:
+
+<img src = "dependancy.jpg" height = "500">
